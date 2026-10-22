@@ -24,7 +24,7 @@ Board: [GitHub Project](https://github.com/users/matheusvir/projects/7) — To D
 ```
 <projeto>/       # submodule → fork do projeto, no perfil do responsável
 smells/<smell>/  # fiél snapshot do trecho analisado (antes: tag v0; depois: merge do PR interno)
-docs/            # provenance.md, deck.pdf
+docs/            # provenance.md, slides.pdf
 ```
 
 O snapshot existe porque o GitHub **não renderiza diff de submodule** (mostra só `Subproject commit abc..def`), e o professor/revisor vão ler na web. O diff navegável das versões mora no PR interno; a contribuição real, no PR upstream.
@@ -151,4 +151,4 @@ refactor: eliminar comentários redundantes em <projeto> (#2)
 - Tags `v0-<smell>` (antes) e `v1-<smell>` (depois) no repo do grupo.
 - PRs internos `entrega/<smell>` → `main`: o "pull request entre as versões" do enunciado.
 - PRs upstream: a contribuição real ao projeto open source (URL registrada em `docs/provenance.md`).
-- `docs/deck.pdf` e o vídeo de apresentação (≤ 10 min), com link no `README.md`.
+- `docs/slides.pdf` e o vídeo de apresentação (≤ 10 min), com link no `README.md`.
