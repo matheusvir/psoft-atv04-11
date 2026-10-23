@@ -1,0 +1,3 @@
+[submodule "retrofit"]
+	path = retrofit
+	url = https://github.com/matheusvir/retrofit.git
