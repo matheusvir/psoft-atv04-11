@@ -1,0 +1,3 @@
+[submodule "commons-cli"]
+	path = commons-cli
+	url = https://github.com/jpereira-Dev/commons-cli.git
