@@ -1,0 +1,35 @@
+
+name: Commons CLI Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Run Maven tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Build Docker image
+        run: docker build -f docker/commons-cli/Dockerfile -t commons-cli-dev .
+
+      - name: Run Maven tests
+        run: |
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}/commons-cli:/workspace" \
+            -v commons-cli-m2:/root/.m2 \
+            -w /workspace \
+            commons-cli-dev mvn test
