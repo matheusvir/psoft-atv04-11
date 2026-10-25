@@ -1,3 +1,6 @@
 [submodule "retrofit"]
 	path = retrofit
 	url = https://github.com/matheusvir/retrofit.git
+[submodule "commons-cli"]
+	path = commons-cli
+	url = https://github.com/jpereira-Dev/commons-cli.git
