@@ -1,3 +1,6 @@
+[submodule "javaparser"]
+	path = javaparser
+	url = https://github.com/RailtonDantas/javaparser.git
 [submodule "retrofit"]
 	path = retrofit
 	url = https://github.com/matheusvir/retrofit.git

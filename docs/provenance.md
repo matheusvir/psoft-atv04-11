@@ -35,6 +35,17 @@ As issues de extração (#1, #3, #5) preenchem o bloco inicial; **SHA refatorado
 - **Path no upstream:** `src/main/java/org/exemplo/Service.java` — duplicação entre `save()` (L40–58) e `update()` (L60–78), copiado para `smells/duplicated-code/`
 - **Por que é code smell:** a lógica de validação e persistência está duplicada em dois métodos públicos; qualquer mudança de regra (ex.: nova validação) precisa ser aplicada duas vezes, e não há sinal no código de que os dois devem permanecer idênticos.
 
+## JavaParser
+
+- **Smell:** duplicated-code
+- **Issue:** #3
+- **URL upstream:** https://github.com/javaparser/javaparser
+- **SHA original:** [JavaParserClassDeclaration.java](https://github.com/javaparser/javaparser/blob/0a9424cefafae806e6e97c56765dbe5ed5e192ae/javaparser-symbol-solver-core/src/main/java/com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserClassDeclaration.java#L323-L419) e [JavaParserRecordDeclaration.java](https://github.com/javaparser/javaparser/blob/0a9424cefafae806e6e97c56765dbe5ed5e192ae/javaparser-symbol-solver-core/src/main/java/com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserRecordDeclaration.java#L386-L482)
+- **SHA refatorado:**
+- **PR upstream:**
+- **Licença (SPDX):** Apache-2.0
+- **Path no upstream:** `javaparser-symbol-solver-core/src/main/java/com/github/javaparser/symbolsolver/javaparsermodel/declarations/JavaParserClassDeclaration.java` (L323–L419) e `JavaParserRecordDeclaration.java` (L386–L482), copiados para `smells/duplicated-code/`
+- **Por que é code smell:** `JavaParserRecordDeclaration` documenta que sua implementação é em grande parte uma cópia da declaração de classe, e o PMD CPD encontrou 97 linhas correspondentes no código de produção. A duplicação abrange `solveType`, `getAncestors` e `isAncestor`. Mudanças na lógica comum de resolução de símbolos e ancestralidade precisam ser mantidas em sincronia, criando risco de divergência. Extrair apenas a lógica comum reduz essa duplicação sem apagar as diferenças específicas entre classes e records.
 ## retrofit (lysine-dev) — divergent change
 
 - **Smell:** divergent-change
