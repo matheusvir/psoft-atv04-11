@@ -35,7 +35,18 @@ As issues de extração (#1, #3, #5) preenchem o bloco inicial; **SHA refatorado
 - **Path no upstream:** `src/main/java/org/exemplo/Service.java` — duplicação entre `save()` (L40–58) e `update()` (L60–78), copiado para `smells/duplicated-code/`
 - **Por que é code smell:** a lógica de validação e persistência está duplicada em dois métodos públicos; qualquer mudança de regra (ex.: nova validação) precisa ser aplicada duas vezes, e não há sinal no código de que os dois devem permanecer idênticos.
 
+## retrofit (lysine-dev) — divergent change
 
+- **Smell:** divergent-change
+- **Issue:** #5
+- **URL upstream:** https://github.com/lysine-dev/retrofit (canônica atual; o projeto nasceu como `square/retrofit`)
+- **SHA original:** https://github.com/lysine-dev/retrofit/blob/3ab0f1a2c18666adb79ebf4eacef6fbc40d3e801/retrofit/src/main/java/retrofit2/RequestFactory.java#L65-L872
+- **SHA refatorado:** _(a preencher pela issue de refactoring #6)_
+- **PR upstream:** _(a preencher pela issue de refactoring #6)_
+- **Licença (SPDX):** Apache-2.0
+- **Submodule:** `retrofit/` (raiz do repo) → fork `https://github.com/matheusvir/retrofit` no padrão definido no CONTRIBUTING, pinado exatamente em `3ab0f1a2c18666adb79ebf4eacef6fbc40d3e801` (tag `3.0.0` do upstream).
+- **Path no upstream:** `retrofit/src/main/java/retrofit2/RequestFactory.java` — classe inteira (872 linhas / 799 LOC), copiada fielmente para `smells/divergent-change/` junto com a `LICENSE.txt`.
+- **Por que é code smell:** a classe muda por **dois motivos independentes**, comprovados em commits reais do upstream. **Eixo A — interpretar e validar anotações da interface** (vocabulário Retrofit): `parseAnnotations` (L66), `Builder.build` (L186), `parseMethodAnnotation` (L232), `parseHttpMethodAndPath` (L270), `parseHeaders` (L304), `parseParameter` (L329), `parseParameterAnnotation` (L368), `validateResolvableType` (L825), `validatePathName` (L832), `parsePathParameters` (L851) — gatilho real: commit `72a1feb9` "Support QUERY method". **Eixo B — montar a requisição em runtime** (vocabulário OkHttp): construtor `RequestFactory(Builder)` (L83) e `create(Object, Object[])` (L98–138) — gatilho real: commit `50472ac1` "Add Invocation.annotationUrl". Mudar uma regra de anotação não deveria tocar o código de montagem de request, e vice-versa; hoje os dois vocabulários compartilham um único arquivo. O smell não é o tamanho nem o padrão Builder — é a mistura de eixos num só arquivo.
 
 ## Apache Commons CLI
 
@@ -53,3 +64,4 @@ As issues de extração (#1, #3, #5) preenchem o bloco inicial; **SHA refatorado
 - **Path no upstream:** `src/main/java/org/apache/commons/cli/Parser.java` — construtor `Parser()` (linhas 35–52), getters `getOptions()` e `getRequiredOptions()` (linhas 75–93), método `processOption()` (linhas 247–264) e setter `setOptions()` (linhas 305–315); arquivo copiado para `smells/comments/Parser.java`.
 
 - **Por que é code smell:** O arquivo contém comentários redundantes em diferentes métodos. No construtor, o Javadoc genérico e o comentário `// empty` descrevem uma operação sem comportamento adicional; nos getters e no setter, os Javadocs repetem os nomes dos métodos e os significados dos parâmetros ou retornos, sem fornecer informações relevantes adicionais. Em `processOption()`, cinco comentários apenas narram as condições e instruções que aparecem logo abaixo deles. Esses comentários não esclarecem decisões não óbvias nem regras de negócio, tornando-se candidatos à remoção para reduzir ruído e evitar divergências entre comentários e implementação.
+
