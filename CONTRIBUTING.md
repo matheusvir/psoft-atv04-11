@@ -144,7 +144,7 @@ refactor: eliminar comentários redundantes em <projeto> (#2)
 - Licença **MIT ou Apache-2.0**, obrigatória — sem licença explícita, descarte.
 - Compila e roda os testes localmente **antes** de ser escolhido.
 - **Um submodule por projeto.** Se dois smells usarem o mesmo projeto, o segundo reusa o submodule e cria branch própria no fork.
-- Leia o `CONTRIBUTING.md` e o `CODE_OF_CONDUCT.md` **do projeto** (não este arquivo) antes de abrir o PR.
+- Leia o `CONTRIBUTING.md` e  **do projeto** (não este arquivo) antes de abrir o PR.
 
 ## O que é avaliado
 
