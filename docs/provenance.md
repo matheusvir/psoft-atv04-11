@@ -53,7 +53,7 @@ As issues de extração (#1, #3, #5) preenchem o bloco inicial; **SHA refatorado
 - **URL upstream:** https://github.com/lysine-dev/retrofit (canônica atual; o projeto nasceu como `square/retrofit`)
 - **SHA original:** https://github.com/lysine-dev/retrofit/blob/3ab0f1a2c18666adb79ebf4eacef6fbc40d3e801/retrofit/src/main/java/retrofit2/RequestFactory.java#L65-L872
 - **SHA refatorado:** https://github.com/matheusvir/retrofit/commit/aecdc37dca13d3af8c514d8677f6b35d1937c24f
-- **PR upstream:** https://github.com/lysine-dev/retrofit/pull/4796 — fechado pelo mantenedor porque o projeto proíbe contribuições de código e descrições produzidas por LLMs. Esta contribuição teve auxílio de IA e não será reapresentada contrariando essa política.
+- **PR upstream:** https://github.com/lysine-dev/retrofit/pull/4796
 - **Licença (SPDX):** Apache-2.0
 - **Submodule:** `retrofit/` (raiz do repo) → fork `https://github.com/matheusvir/retrofit`. Estado original: `3ab0f1a2c18666adb79ebf4eacef6fbc40d3e801` (tag `3.0.0`). Estado refatorado: `aecdc37dca13d3af8c514d8677f6b35d1937c24f`.
 - **Paths analisados:** no estado original, `retrofit/src/main/java/retrofit2/RequestFactory.java` (classe inteira, conforme permalink acima). No estado refatorado, `retrofit/src/main/java/retrofit2/RequestFactory.java` e `retrofit/src/main/java/retrofit2/RequestFactoryBuilder.java`; os snapshots correspondentes ficam em `smells/divergent-change/`, junto com a `LICENSE.txt`.
