@@ -49,15 +49,17 @@ As issues de extração (#1, #3, #5) preenchem o bloco inicial; **SHA refatorado
 ## retrofit (lysine-dev) — divergent change
 
 - **Smell:** divergent-change
-- **Issue:** #5
+- **Issue:** #5 (setup) e #6 (refatoração)
 - **URL upstream:** https://github.com/lysine-dev/retrofit (canônica atual; o projeto nasceu como `square/retrofit`)
 - **SHA original:** https://github.com/lysine-dev/retrofit/blob/3ab0f1a2c18666adb79ebf4eacef6fbc40d3e801/retrofit/src/main/java/retrofit2/RequestFactory.java#L65-L872
-- **SHA refatorado:** _(a preencher pela issue de refactoring #6)_
-- **PR upstream:** _(a preencher pela issue de refactoring #6)_
+- **SHA refatorado:** https://github.com/matheusvir/retrofit/commit/aecdc37dca13d3af8c514d8677f6b35d1937c24f
+- **PR upstream:** https://github.com/lysine-dev/retrofit/pull/4796
 - **Licença (SPDX):** Apache-2.0
-- **Submodule:** `retrofit/` (raiz do repo) → fork `https://github.com/matheusvir/retrofit` no padrão definido no CONTRIBUTING, pinado exatamente em `3ab0f1a2c18666adb79ebf4eacef6fbc40d3e801` (tag `3.0.0` do upstream).
-- **Path no upstream:** `retrofit/src/main/java/retrofit2/RequestFactory.java` — classe inteira (872 linhas / 799 LOC), copiada fielmente para `smells/divergent-change/` junto com a `LICENSE.txt`.
-- **Por que é code smell:** a classe muda por **dois motivos independentes**, comprovados em commits reais do upstream. **Eixo A — interpretar e validar anotações da interface** (vocabulário Retrofit): `parseAnnotations` (L66), `Builder.build` (L186), `parseMethodAnnotation` (L232), `parseHttpMethodAndPath` (L270), `parseHeaders` (L304), `parseParameter` (L329), `parseParameterAnnotation` (L368), `validateResolvableType` (L825), `validatePathName` (L832), `parsePathParameters` (L851) — gatilho real: commit `72a1feb9` "Support QUERY method". **Eixo B — montar a requisição em runtime** (vocabulário OkHttp): construtor `RequestFactory(Builder)` (L83) e `create(Object, Object[])` (L98–138) — gatilho real: commit `50472ac1` "Add Invocation.annotationUrl". Mudar uma regra de anotação não deveria tocar o código de montagem de request, e vice-versa; hoje os dois vocabulários compartilham um único arquivo. O smell não é o tamanho nem o padrão Builder — é a mistura de eixos num só arquivo.
+- **Submodule:** `retrofit/` (raiz do repo) → fork `https://github.com/matheusvir/retrofit`. Estado original: `3ab0f1a2c18666adb79ebf4eacef6fbc40d3e801` (tag `3.0.0`). Estado refatorado: `aecdc37dca13d3af8c514d8677f6b35d1937c24f`.
+- **Paths analisados:** no estado original, `retrofit/src/main/java/retrofit2/RequestFactory.java` (classe inteira, conforme permalink acima). No estado refatorado, `retrofit/src/main/java/retrofit2/RequestFactory.java` e `retrofit/src/main/java/retrofit2/RequestFactoryBuilder.java`; os snapshots correspondentes ficam em `smells/divergent-change/`, junto com a `LICENSE.txt`.
+- **Por que é code smell:** o diagnóstico de **Divergent Change** adotado para a atividade identifica dois motivos independentes para alterar o arquivo original. **Eixo A — interpretar e validar anotações:** `Builder.build`, `parseMethodAnnotation`, `parseHttpMethodAndPath`, `parseHeaders`, `parseParameter`, `parseParameterAnnotation`, `validateResolvableType`, `validatePathName` e `parsePathParameters`; `parseAnnotations` é a fachada de entrada. **Eixo B — montar a requisição em runtime:** `RequestFactory.create`, usando a configuração transferida pelo construtor. Os commits posteriores ao SHA original `72a1feb9` ("Support QUERY method") e `50472ac1` ("Add Invocation.annotationUrl") ilustram mudanças independentes, respectivamente no parsing e em `create`. Embora a classe estática interna já separasse parcialmente essas responsabilidades, os dois eixos permaneciam no mesmo arquivo.
+- **Refatoração aplicada ao smell:** para tratar essa preocupação de **Divergent Change**, foi aplicado **Extract Class**: o antigo `RequestFactory.Builder` foi extraído para a classe package-private `RequestFactoryBuilder`, que concentra parsing e validação. `RequestFactory` mantém a fachada, a configuração resultante e a montagem runtime. A separação explicita os eixos em arquivos próprios: mudanças nas regras de anotações ficam localizadas no builder, enquanto mudanças na montagem runtime ficam em `RequestFactory`.
+- **Integração com upstream:** a branch incorporou a `trunk` no SHA `dce3fe08b610e3339005c3e963b6f1938d079929`, preservando suporte a `@QUERY` e `Invocation.annotationUrl`. Portanto, o diff entre o SHA original e o refatorado inclui atualizações do upstream além da extração; para isolar esta última, compare a base integrada com o SHA refatorado.
 
 ## Apache Commons CLI
 
@@ -75,4 +77,3 @@ As issues de extração (#1, #3, #5) preenchem o bloco inicial; **SHA refatorado
 - **Path no upstream:** `src/main/java/org/apache/commons/cli/Parser.java` — construtor `Parser()` (linhas 35–52), getters `getOptions()` e `getRequiredOptions()` (linhas 75–93), método `processOption()` (linhas 247–264) e setter `setOptions()` (linhas 305–315); arquivo copiado para `smells/comments/Parser.java`.
 
 - **Por que é code smell:** O arquivo contém comentários redundantes em diferentes métodos. No construtor, o Javadoc genérico e o comentário `// empty` descrevem uma operação sem comportamento adicional; nos getters e no setter, os Javadocs repetem os nomes dos métodos e os significados dos parâmetros ou retornos, sem fornecer informações relevantes adicionais. Em `processOption()`, cinco comentários apenas narram as condições e instruções que aparecem logo abaixo deles. Esses comentários não esclarecem decisões não óbvias nem regras de negócio, tornando-se candidatos à remoção para reduzir ruído e evitar divergências entre comentários e implementação.
-
