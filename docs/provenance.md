@@ -73,8 +73,8 @@ As issues de extração (#1, #3, #5) preenchem o bloco inicial; **SHA refatorado
   - [Getters `getOptions()` e `getRequiredOptions()`, linhas 75–93](https://github.com/apache/commons-cli/blob/03ff1171f35a45721131c4c7ef65973a796f8d6a/src/main/java/org/apache/commons/cli/Parser.java#L75-L93)
   - [Método `processOption()`, linhas 247–264](https://github.com/apache/commons-cli/blob/03ff1171f35a45721131c4c7ef65973a796f8d6a/src/main/java/org/apache/commons/cli/Parser.java#L247-L264)
   - [Setter `setOptions()`, linhas 305–315](https://github.com/apache/commons-cli/blob/03ff1171f35a45721131c4c7ef65973a796f8d6a/src/main/java/org/apache/commons/cli/Parser.java#L305-L315)
-- **SHA refatorado:** A preencher após a refatoração, na issue correspondente.
-- **PR upstream:** A preencher após a abertura do PR de refatoração.
+- **SHA refatorado:** https://github.com/jpereira-Dev/commons-cli/commit/be083ea4089a0e1a781eeb22b8c2927c5b698f2f
+- **PR upstream:** https://github.com/apache/commons-cli/pull/445
 - **Licença (SPDX):** Apache-2.0
 - **Path no upstream:** `src/main/java/org/apache/commons/cli/Parser.java` — construtor `Parser()` (linhas 35–52), getters `getOptions()` e `getRequiredOptions()` (linhas 75–93), método `processOption()` (linhas 247–264) e setter `setOptions()` (linhas 305–315); arquivo copiado para `smells/comments/Parser.java`.
 
