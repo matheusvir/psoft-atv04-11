@@ -1,4 +1,4 @@
-# Code smells em três projetos Java open source
+# Code smells em Projetos Java Open Source
 
 Atividade 4 da disciplina de Projetos de Software (UFCG): diagnóstico e eliminação de code smells em três projetos Java, com as refatorações submetidas como pull requests aos repositórios upstream.
 
@@ -48,7 +48,7 @@ PR: [apache/commons-cli#445](https://github.com/apache/commons-cli/pull/445).
 
 Slides (Google Slides): https://docs.google.com/presentation/d/14438cgcdd60tslNo_pcUN85JMqtrIbTABDVbRfcx00A/edit?usp=sharing
 
-Vídeo (até 10 min): _link a publicar neste espaço_
+Vídeo: _link a publicar neste espaço_
 
 ---
 
