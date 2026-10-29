@@ -46,9 +46,9 @@ PR: [apache/commons-cli#445](https://github.com/apache/commons-cli/pull/445).
 
 ## Apresentação
 
-Slides (Google Slides): https://docs.google.com/presentation/d/14438cgcdd60tslNo_pcUN85JMqtrIbTABDVbRfcx00A/edit?usp=sharing
+Slides: [Google Slides](https://docs.google.com/presentation/d/14438cgcdd60tslNo_pcUN85JMqtrIbTABDVbRfcx00A/edit?usp=sharing)
 
-Vídeo: _link a publicar neste espaço_
+Vídeo: [Google Drive](https://drive.google.com/file/d/1wxRzoikULQp2_UADEjg7rjzo-VzgBU6x/view?usp=sharing)
 
 ---
 
